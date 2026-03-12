@@ -1,6 +1,6 @@
 # DE.CA. Srl - Sito di Presentazione
 
-Sito web di presentazione aziendale ispirato a decaonline.it - assistenza tecnica apparecchiature elettromedicali e scientifiche.
+Sito web di presentazione aziendale - assistenza tecnica apparecchiature elettromedicali e scientifiche.
 
 ## Tecnologie
 
