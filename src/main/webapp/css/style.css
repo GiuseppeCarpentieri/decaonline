@@ -647,17 +647,17 @@ body {
 .footer {
     background: var(--bg-light);
     color: var(--text);
-    padding: 48px 0 0;
+    padding-top: 60px;
     border-top: 1px solid var(--border);
 }
 
 .footer-content {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     flex-wrap: wrap;
     gap: 32px;
-    margin-bottom: 32px;
+    padding-bottom: 60px; /* Spazio sotto il contenuto, prima della barra scura */
 }
 
 .footer-brand .logo-accent,
@@ -857,5 +857,17 @@ body {
     
     .footer-content {
         flex-direction: column;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .footer-links {
+        justify-content: center;
+    }
+
+    .footer-brand {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 }
