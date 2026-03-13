@@ -1,50 +1,43 @@
-# DE.CA. Srl - Sito di Presentazione
+# DE.CA. Srl - Sito di Presentazione (Statico)
 
 Sito web di presentazione aziendale - assistenza tecnica apparecchiature elettromedicali e scientifiche.
 
 ## Tecnologie
 
-- **Java** - Servlet per gestione form contatti
 - **HTML5** - Struttura semantica
 - **CSS3** - Design responsive e moderno
+- **JavaScript** - Interattività e gestione temi
+- **Formspree** - Gestione modulo contatti (backend-as-a-service)
 
 ## Requisiti
 
-- Java 11 o superiore
-- Maven 3.6+
+Non sono necessari server particolari. Basta un comune browser.
 
 ## Come eseguire
 
-```bash
-# Compila il progetto
-mvn clean package
+1.  Apri il file `index.html` direttamente nel tuo browser.
+2.  Oppure, se usi VS Code, usa l'estensione **Live Server** per una migliore esperienza di sviluppo.
 
-# Avvia con Tomcat embedded
-mvn tomcat7:run
-```
+## Configurazione Modulo Contatti
 
-Poi apri il browser su: **http://localhost:8080**
+Per rendere funzionante il modulo contatti:
+1.  Vai su [Formspree.io](https://formspree.io/) e crea un account gratuito.
+2.  Crea un nuovo "Form" e copia l'URL fornito (tipo `https://formspree.io/f/xxxxxx`).
+3.  Nel file `index.html`, cerca la riga `<form ... action="...">` e sostituisci `tuo-codice` con il codice che hai ottenuto.
 
 ## Struttura
 
 ```
-├── pom.xml
-├── src/main/
-│   ├── java/com/sito/servlet/
-│   │   └── ContactServlet.java
-│   └── webapp/
-│       ├── WEB-INF/web.xml
-│       ├── index.html
-│       ├── privacy.html
-│       ├── cookies.html
-│       ├── css/style.css
-│       └── js/main.js
+├── index.html
+├── apparecchiature-scientifiche.html
+├── cookies.html
+├── privacy.html
+├── movimentazione-apparecchiature.html
+├── qr-code-personalizzato.html
+├── css/
+│   └── style.css
+├── js/
+│   └── main.js
+├── images/
+└── icons/
 ```
-
-## Contenuti
-
-- **Home** - Hero, servizi, presentazione azienda
-- **Servizi** - Apparecchiature scientifiche, movimentazione, QR code
-- **L'Azienda** - Profilo, certificazioni ISO 9001
-- **Contatti** - Form con validazione lato server
-- **Privacy & Cookie** - Pagine informative
