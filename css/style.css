@@ -750,47 +750,80 @@ body {
 .theme-switcher {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-left: 20px;
+    gap: 0;
+    margin-left: 96px; /* 20px + 76px di compensazione */
     padding: 4px;
     background: var(--bg-light);
     border-radius: 20px;
     border: 1px solid var(--border);
+    transition: gap 0.3s ease, margin-left 0.3s ease;
 }
 
 .theme-btn {
     background: none;
     border: none;
     cursor: pointer;
-    padding: 6px;
+    padding: 0;
+    width: 0;
+    height: 30px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s;
+    transition: all 0.3s ease;
     color: var(--text-light);
+    opacity: 0;
+    pointer-events: none;
+    overflow: hidden;
 }
 
-.theme-btn:hover {
+.theme-btn.active {
+    width: 30px;
+    opacity: 1;
+    pointer-events: auto;
+    background: var(--primary);
+    color: var(--white);
+}
+
+.theme-switcher:hover {
+    gap: 8px;
+    margin-left: 20px;
+}
+
+.theme-switcher:hover .theme-btn {
+    width: 30px;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.theme-switcher:hover .theme-btn:hover {
     background: var(--border);
     color: var(--primary);
 }
 
-.theme-btn.active {
+.theme-switcher:hover .theme-btn.active {
     background: var(--primary);
     color: var(--white);
+}
+
+.theme-switcher:hover .theme-btn.active:hover {
+    background: var(--primary-dark);
 }
 
 .theme-btn svg {
     width: 18px;
     height: 18px;
     fill: currentColor;
+    flex-shrink: 0;
 }
 
 @media (max-width: 768px) {
     .theme-switcher {
-        margin: 20px 0;
+        margin: 20px auto;
         justify-content: center;
+    }
+    .theme-switcher:hover {
+        margin: 20px auto;
     }
 }
 
