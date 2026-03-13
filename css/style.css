@@ -57,7 +57,12 @@ a {
 }
 
 a:hover {
-    color: var(--primary-dark);
+    color: var(--orange);
+}
+
+/* Evitiamo che l'hover globale sui link rompa i bottoni */
+.btn:hover {
+    color: var(--pure-white) !important;
 }
 
 html {
@@ -115,6 +120,11 @@ body {
 
 .header-contact:hover {
     opacity: 1;
+    color: var(--orange);
+}
+
+.header-contact:hover .icon {
+    filter: invert(53%) sepia(75%) saturate(2465%) hue-rotate(352deg) brightness(101%) contrast(97%);
 }
 
 .header-contact .icon {
@@ -205,7 +215,7 @@ body {
 .nav-menu a:hover,
 .submenu-toggle:hover,
 .submenu-toggle:focus-visible {
-    color: var(--accent);
+    color: var(--orange);
 }
 
 .submenu-caret {
@@ -275,11 +285,12 @@ body {
 
 .submenu a:hover {
     background: var(--bg-light);
-    color: var(--accent);
+    color: var(--orange);
 }
 
 .submenu a:hover::before {
     height: 20px;
+    background: var(--orange);
 }
 
 .nav-item.has-submenu:hover .submenu,
@@ -370,12 +381,13 @@ body {
 
 .btn-primary {
     background: var(--accent);
-    color: #ffffff; /* White text looks better on cyan */
+    color: var(--pure-white);
 }
 
 .btn-primary:hover {
-    background: var(--accent-dark);
-    box-shadow: 0 4px 12px rgba(0, 168, 232, 0.2);
+    background: var(--orange);
+    color: var(--pure-white) !important;
+    box-shadow: 0 4px 15px rgba(249, 115, 22, 0.4);
 }
 
 .btn-secondary {
@@ -385,8 +397,9 @@ body {
 }
 
 .btn-secondary:hover {
-    background: var(--pure-white);
-    color: var(--primary);
+    background: var(--orange);
+    color: var(--pure-white) !important;
+    border-color: var(--orange);
 }
 
 .btn-portal {
