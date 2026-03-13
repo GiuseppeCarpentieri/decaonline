@@ -51,3 +51,42 @@ document.querySelectorAll('.nav-menu a').forEach(link => {
         navMenu?.classList.remove('active');
     });
 });
+
+// Theme Management
+const themeBtns = document.querySelectorAll('.theme-btn');
+const root = document.documentElement;
+
+function setTheme(theme) {
+    if (theme === 'system') {
+        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        root.setAttribute('data-theme', isDark ? 'dark' : 'light');
+    } else {
+        root.setAttribute('data-theme', theme);
+    }
+    
+    // Update active class on buttons
+    themeBtns.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.theme === theme);
+    });
+    
+    // Save preference
+    localStorage.setItem('theme-preference', theme);
+}
+
+// Initial theme setup
+const savedTheme = localStorage.getItem('theme-preference') || 'system';
+setTheme(savedTheme);
+
+// Listen for system theme changes if set to system
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    if (localStorage.getItem('theme-preference') === 'system') {
+        root.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+    }
+});
+
+// Add click listeners to theme buttons
+themeBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        setTheme(btn.dataset.theme);
+    });
+});
