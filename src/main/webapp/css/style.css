@@ -13,7 +13,10 @@
     --primary: #0066a1;
     --primary-dark: #004d7a;
     --secondary: #1a3a52;
-    --accent: #00a8e8;
+    --accent: #00a8e8; /* Reverted to professional cyan */
+    --accent-dark: #008cc2;
+    --orange: #f97316; /* Brand orange for specific actions */
+    --orange-dark: #ea580c;
     --text: #2c3e50;
     --text-light: #5a6c7d;
     --bg-light: #f5f7fa;
@@ -21,17 +24,22 @@
     --border: #e1e8ed;
     --shadow: rgba(0, 0, 0, 0.08);
     --pure-white: #ffffff;
+    --btn-text: #ffffff; /* White text for buttons in light mode */
 }
 
 [data-theme="dark"] {
     --primary: #00a8e8;
     --primary-dark: #0066a1;
-    --secondary: #63b3ed; /* Lighter blue for better contrast in dark mode titles */
-    --accent: #00d4ff;
-    --text: #e2e8f0;
+    --secondary: #63b3ed;
+    --accent: #00d4ff; /* Brighter cyan for dark mode */
+    --accent-dark: #00a8e8;
+    --orange: #fb923c;
+    --orange-dark: #f97316;
+    --text: #f8fafc;
     --text-light: #a0aec0;
     --bg-light: #0f172a;
     --white: #1e293b;
+    --btn-text: #1e293b; /* Dark text for buttons in dark mode */
     --border: #334155;
     --shadow: rgba(0, 0, 0, 0.4);
 }
@@ -197,8 +205,7 @@ body {
 .nav-menu a:hover,
 .submenu-toggle:hover,
 .submenu-toggle:focus-visible {
-    color: var(--primary);
-    border-bottom-color: var(--primary);
+    color: var(--accent);
 }
 
 .submenu-caret {
@@ -227,7 +234,7 @@ body {
     margin: 0;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-8px) scale(0.96);
+    transform: translateY(4px); /* Simplified transition */
     transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
     z-index: 10;
 }
@@ -261,14 +268,14 @@ body {
     transform: translateY(-50%);
     width: 3px;
     height: 0;
-    background: var(--primary);
+    background: var(--accent);
     border-radius: 0 2px 2px 0;
     transition: height 0.2s ease;
 }
 
 .submenu a:hover {
-    background: linear-gradient(135deg, rgba(0, 102, 161, 0.08) 0%, rgba(0, 168, 232, 0.05) 100%);
-    color: var(--primary);
+    background: var(--bg-light);
+    color: var(--accent);
 }
 
 .submenu a:hover::before {
@@ -303,7 +310,7 @@ body {
 /* Hero Section */
 .hero {
     position: relative;
-    background: linear-gradient(135deg, #0066a1 0%, #1a3a52 100%);
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary) 100%);
     min-height: 500px;
     display: flex;
     align-items: center;
@@ -346,7 +353,9 @@ body {
 
 /* Buttons */
 .btn {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     padding: 14px 28px;
     font-size: 1rem;
     font-weight: 600;
@@ -356,38 +365,39 @@ body {
     cursor: pointer;
     border: none;
     font-family: inherit;
+    line-height: 1;
 }
 
 .btn-primary {
     background: var(--accent);
-    color: var(--pure-white);
+    color: #ffffff; /* White text looks better on cyan */
 }
 
 .btn-primary:hover {
-    background: #0099cc;
-    transform: translateY(-1px);
+    background: var(--accent-dark);
+    box-shadow: 0 4px 12px rgba(0, 168, 232, 0.2);
 }
 
 .btn-secondary {
     background: transparent;
     color: var(--pure-white);
-    border: 2px solid rgba(255, 255, 255, 0.8);
+    border: 2px solid var(--pure-white);
 }
 
 .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: var(--white);
+    background: var(--pure-white);
+    color: var(--primary);
 }
 
 .btn-portal {
-    background: #f97316;
-    color: var(--pure-white);
+    background: var(--orange);
+    color: #ffffff;
+    font-weight: 700;
 }
 
 .btn-portal:hover {
-    background: #ea580c;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+    background: var(--orange-dark);
+    box-shadow: 0 6px 20px rgba(249, 115, 22, 0.3);
 }
 
 .btn-block {
@@ -433,9 +443,8 @@ body {
 }
 
 .service-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(0, 102, 161, 0.12);
-    border-color: var(--primary);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    border-color: var(--accent);
 }
 
 .service-icon {
@@ -457,6 +466,14 @@ body {
     filter: invert(53%) sepia(75%) saturate(2465%) hue-rotate(352deg) brightness(101%) contrast(97%);
 }
 
+.contact-icon img {
+    filter: invert(53%) sepia(75%) saturate(2465%) hue-rotate(352deg) brightness(101%) contrast(97%);
+}
+
+[data-theme="dark"] .contact-icon img {
+    filter: invert(53%) sepia(75%) saturate(2465%) hue-rotate(352deg) brightness(101%) contrast(97%);
+}
+
 [data-theme="dark"] .service-icon img,
 [data-theme="dark"] .page-icon img {
     filter: invert(53%) sepia(75%) saturate(2465%) hue-rotate(352deg) brightness(101%) contrast(97%);
@@ -466,7 +483,7 @@ body {
 
 .service-card h3 {
     font-size: 1.25rem;
-    color: var(--primary);
+    color: var(--secondary);
     margin-bottom: 12px;
 }
 
@@ -524,7 +541,7 @@ body {
     top: 10px;
     width: 18px;
     height: 18px;
-    filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(166deg) brightness(86%) contrast(97%);
+    filter: invert(53%) sepia(75%) saturate(2465%) hue-rotate(352deg) brightness(101%) contrast(97%);
 }
 
 .about-badges {
@@ -663,7 +680,7 @@ body {
 .footer-brand .logo-accent,
 .footer-brand .logo-main,
 .footer-brand .logo-srl {
-    color: var(--secondary);
+    color: var(--primary);
 }
 
 .footer-brand p {
@@ -684,8 +701,9 @@ body {
 }
 
 .footer-links a {
-    color: var(--primary);
+    color: var(--text-light);
     text-decoration: none;
+    font-weight: 500;
 }
 
 .footer-links a:hover {
@@ -870,4 +888,58 @@ body {
         flex-direction: column;
         align-items: center;
     }
+}
+
+/* Page Content (Subpages) */
+.page-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 80px 24px;
+}
+
+.page-content h1 {
+    color: var(--secondary);
+    margin-bottom: 24px;
+    font-size: 2rem; /* Uniformato con .section-title */
+    font-weight: 700;
+}
+
+.page-content h2 {
+    font-size: 1.25rem; /* Uniformato con i sottotitoli dei blocchi */
+    margin-top: 40px;
+    margin-bottom: 16px;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.page-content p {
+    margin-bottom: 20px;
+    line-height: 1.8;
+    color: var(--text);
+}
+
+.page-content ul {
+    margin-bottom: 24px;
+    padding-left: 32px;
+}
+
+.page-content li {
+    margin-bottom: 12px;
+    position: relative;
+    list-style-type: disc;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 32px;
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.2s;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+    transform: translateX(-5px);
 }
