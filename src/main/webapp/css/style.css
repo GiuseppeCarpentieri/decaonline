@@ -42,6 +42,16 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
+a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: var(--primary-dark);
+}
+
 html {
     scroll-behavior: smooth;
 }
