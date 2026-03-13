@@ -726,12 +726,13 @@ body {
 }
 
 .footer-links a {
-    color: var(--text-light);
+    color: var(--primary);
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .footer-links a:hover {
+    color: var(--orange);
     text-decoration: underline;
 }
 
