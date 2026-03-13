@@ -166,6 +166,18 @@ body {
     display: block;
 }
 
+.logo-dark {
+    display: none !important;
+}
+
+[data-theme="dark"] .logo-light {
+    display: none !important;
+}
+
+[data-theme="dark"] .logo-dark {
+    display: block !important;
+}
+
 .logo-accent {
     color: var(--primary);
 }
