@@ -968,3 +968,60 @@ body {
     text-decoration: underline;
     transform: translateX(-5px);
 }
+
+/* Partners Carousel */
+.partners-section {
+    padding: 30px 0;
+    background: var(--white);
+    overflow: hidden;
+    border-top: 1px solid var(--border);
+}
+
+.partners-slider {
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    padding: 20px 0;
+}
+
+.partners-track {
+    display: flex;
+    gap: 60px;
+    animation: scroll 40s linear infinite;
+    width: max-content;
+}
+
+.partner-logo {
+    flex-shrink: 0;
+}
+
+.partner-logo img {
+    height: 90px;
+    width: auto;
+    filter: grayscale(100%);
+    opacity: 0.5;
+    transition: all 0.3s ease;
+}
+
+.partner-logo img:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.15);
+}
+
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* Dark mode adjustments for partner logos */
+[data-theme="dark"] .partner-logo img {
+    filter: grayscale(100%) invert(1) brightness(2);
+    opacity: 0.6;
+}
+
+[data-theme="dark"] .partner-logo img:hover {
+    filter: grayscale(0%) invert(0) brightness(1);
+    opacity: 1;
+}
+
