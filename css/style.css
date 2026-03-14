@@ -1025,6 +1025,10 @@ body {
     width: max-content;
 }
 
+.partners-slider:hover .partners-track {
+    animation-play-state: paused;
+}
+
 .partner-logo {
     flex-shrink: 0;
 }
