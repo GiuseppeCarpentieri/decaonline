@@ -685,6 +685,30 @@ body {
     min-height: 120px;
 }
 
+.form-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.form-checkbox input[type="checkbox"] {
+    width: auto;
+    margin-top: 4px;
+    cursor: pointer;
+}
+
+.form-checkbox label {
+    font-weight: 400;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    cursor: pointer;
+}
+
+.form-checkbox a {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
 /* Footer */
 .footer {
     background: var(--bg-light);
@@ -1061,5 +1085,121 @@ body {
 [data-theme="dark"] .partner-logo img:hover {
     filter: grayscale(0%) invert(0) brightness(1);
     opacity: 1;
+}
+
+/* GDPR Cookie Banner */
+.cookie-banner {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    right: 24px;
+    max-width: 500px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    padding: 24px;
+    z-index: 10000;
+    display: none;
+    animation: slideUp 0.4s ease-out;
+}
+
+.cookie-banner.show {
+    display: block;
+}
+
+.cookie-content h4 {
+    margin-bottom: 12px;
+    color: var(--secondary);
+    font-size: 1.1rem;
+}
+
+.cookie-content p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.cookie-content a {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+.cookie-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-cookie-accept {
+    background: var(--primary);
+    color: #ffffff !important; /* Force white text for readability in light mode */
+    padding: 10px 20px;
+    font-size: 0.9rem;
+}
+
+.btn-cookie-accept:hover {
+    background: var(--primary-dark);
+}
+
+.btn-cookie-minimal {
+    background: var(--bg-light);
+    color: var(--text);
+    padding: 10px 20px;
+    font-size: 0.9rem;
+}
+
+.btn-cookie-minimal:hover {
+    background: var(--border);
+    color: var(--text) !important;
+}
+
+.btn-cookie-reject {
+    background: transparent;
+    color: var(--text); /* Use main text color instead of text-light */
+    border: 1px solid var(--border);
+    padding: 10px 20px;
+    font-size: 0.9rem;
+}
+
+.btn-cookie-reject:hover {
+    background: var(--bg-light);
+    color: var(--text) !important;
+}
+
+.cookie-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    line-height: 1;
+    color: var(--text-light);
+    cursor: pointer;
+    padding: 4px;
+    transition: color 0.2s;
+}
+
+.cookie-close:hover {
+    color: var(--text);
+}
+
+@keyframes slideUp {
+    from { transform: translateY(100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@media (max-width: 600px) {
+    .cookie-banner {
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        padding: 20px;
+    }
+    
+    .cookie-buttons {
+        flex-direction: column;
+    }
 }
 

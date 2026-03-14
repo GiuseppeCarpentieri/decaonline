@@ -90,3 +90,41 @@ themeBtns.forEach(btn => {
         setTheme(btn.dataset.theme);
     });
 });
+
+// GDPR Cookie Banner Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const cookieBanner = document.createElement('div');
+    cookieBanner.id = 'cookieBanner';
+    cookieBanner.className = 'cookie-banner';
+    cookieBanner.innerHTML = `
+        <button id="closeCookieBanner" class="cookie-close" aria-label="Chiudi e rifiuta">&times;</button>
+        <div class="cookie-content">
+            <h4>Informativa sui Cookie</h4>
+            <p>Questo sito utilizza cookie tecnici per garantirti la migliore esperienza di navigazione. Puoi scegliere di accettare tutti i cookie, rifiutarli o proseguire con quelli necessari. Consulta la nostra <a href="cookies.html">Cookie Policy</a> per maggiori dettagli.</p>
+            <div class="cookie-buttons">
+                <button id="acceptCookies" class="btn btn-cookie-accept">Accetta Tutti</button>
+                <button id="minimalCookies" class="btn btn-cookie-minimal">Solo Necessari</button>
+                <button id="rejectCookies" class="btn btn-cookie-reject">Rifiuta</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(cookieBanner);
+
+    const hasSetPreference = localStorage.getItem('cookie-consent');
+
+    if (!hasSetPreference) {
+        setTimeout(() => {
+            cookieBanner.classList.add('show');
+        }, 1000);
+    }
+
+    const handleConsent = (preference) => {
+        localStorage.setItem('cookie-consent', preference);
+        cookieBanner.classList.remove('show');
+    };
+
+    document.getElementById('acceptCookies')?.addEventListener('click', () => handleConsent('accepted'));
+    document.getElementById('minimalCookies')?.addEventListener('click', () => handleConsent('minimal'));
+    document.getElementById('rejectCookies')?.addEventListener('click', () => handleConsent('rejected'));
+    document.getElementById('closeCookieBanner')?.addEventListener('click', () => handleConsent('rejected'));
+});
