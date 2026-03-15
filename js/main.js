@@ -165,12 +165,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 status.className = "form-status success show";
                 contactForm.reset();
             } else {
-                const result = await response.json();
-                if (Object.hasOwn(result, 'errors')) {
-                    status.innerHTML = result["errors"].map(error => error["message"]).join(", ");
-                } else {
-                    status.innerHTML = "Si è verificato un errore durante l'invio. Riprova più tardi.";
+                let message = "Si è verificato un errore durante l'invio. Riprova più tardi.";
+                try {
+                    const result = await response.json();
+                    if (result && result.errors) {
+                        message = result.errors.map(error => error.message).join(", ");
+                    }
+                } catch (e) {
+                    // Se non è JSON, manteniamo il messaggio di default
                 }
+                status.innerHTML = message;
                 status.className = "form-status error show";
             }
         } catch (error) {
