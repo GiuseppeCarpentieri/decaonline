@@ -84,12 +84,23 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
     }
 });
 
-// Add click listeners to theme buttons
-themeBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        setTheme(btn.dataset.theme);
+// Add cyclic click listener to theme switcher container (more robust for mobile)
+const themeSwitcher = document.querySelector('.theme-switcher');
+const themeCycle = ['light', 'dark', 'system'];
+
+if (themeSwitcher) {
+    themeSwitcher.addEventListener('click', (e) => {
+        e.preventDefault();
+        const currentTheme = localStorage.getItem('theme-preference') || 'system';
+        let currentIndex = themeCycle.indexOf(currentTheme);
+        if (currentIndex === -1) currentIndex = 2; // Default to system if corrupted
+        
+        const nextIndex = (currentIndex + 1) % themeCycle.length;
+        const nextTheme = themeCycle[nextIndex];
+        
+        setTheme(nextTheme);
     });
-});
+}
 
 // GDPR Cookie Banner Logic
 document.addEventListener('DOMContentLoaded', () => {

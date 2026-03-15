@@ -812,68 +812,46 @@ body {
     color: rgba(255, 255, 255, 0.9);
 }
 
-/* Theme Switcher Styles */
+/* Theme Switcher Styles - Simplified Rotation */
 .theme-switcher {
     display: flex;
     align-items: center;
-    gap: 0;
-    margin-left: 96px; /* 20px + 76px di compensazione */
-    padding: 4px;
+    justify-content: center;
+    margin-left: 20px;
+    width: 40px; /* Increased for mobile touch area */
+    height: 40px; /* Increased for mobile touch area */
     background: var(--bg-light);
-    border-radius: 20px;
+    border-radius: 50%;
     border: 1px solid var(--border);
-    transition: gap 0.3s ease, margin-left 0.3s ease;
+    cursor: pointer;
+    padding: 0;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.theme-switcher:hover {
+    background: var(--border);
 }
 
 .theme-btn {
     background: none;
     border: none;
-    cursor: pointer;
     padding: 0;
     width: 0;
-    height: 30px;
-    border-radius: 50%;
-    display: flex;
+    height: 0;
+    display: none; /* Hidden by default */
     align-items: center;
     justify-content: center;
-    transition: all 0.3s ease;
     color: var(--text-light);
-    opacity: 0;
-    pointer-events: none;
-    overflow: hidden;
+    pointer-events: none; /* Let the container handle clicks */
 }
 
 .theme-btn.active {
-    width: 30px;
-    opacity: 1;
-    pointer-events: auto;
+    width: 32px;
+    height: 32px;
+    display: flex; /* Only active shown */
     background: var(--primary);
     color: var(--white);
-}
-
-.theme-switcher:hover {
-    gap: 8px;
-    margin-left: 20px;
-}
-
-.theme-switcher:hover .theme-btn {
-    width: 30px;
-    opacity: 1;
-    pointer-events: auto;
-}
-
-.theme-switcher:hover .theme-btn:hover {
-    background: var(--border);
-    color: var(--primary);
-}
-
-.theme-switcher:hover .theme-btn.active {
-    background: var(--primary);
-    color: var(--white);
-}
-
-.theme-switcher:hover .theme-btn.active:hover {
-    background: var(--primary-dark);
+    border-radius: 50%;
 }
 
 .theme-btn svg {
@@ -883,15 +861,7 @@ body {
     flex-shrink: 0;
 }
 
-@media (max-width: 768px) {
-    .theme-switcher {
-        margin: 20px auto;
-        justify-content: center;
-    }
-    .theme-switcher:hover {
-        margin: 20px auto;
-    }
-}
+
 
 /* Page icons (subpages) */
 .page-icon {
@@ -943,8 +913,24 @@ body {
         justify-content: center;
     }
     
+    .navbar-inner {
+        padding: 12px 16px;
+        gap: 10px;
+    }
+
+    .logo {
+        margin-right: auto;
+    }
+
     .nav-toggle {
         display: flex;
+        order: 3;
+        margin-left: 4px; /* Space between switcher and toggle */
+    }
+
+    .theme-switcher {
+        order: 2;
+        margin: 0 !important;
     }
     
     .nav-menu {
