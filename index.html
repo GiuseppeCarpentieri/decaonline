@@ -217,7 +217,12 @@
                         <p><strong>Email:</strong><br><a href="mailto:info@decaonline.it">info@decaonline.it</a></p>
                         <p><strong>PEC:</strong><br><a href="mailto:decaonlinesrl@pec.it">decaonlinesrl@pec.it</a></p>
                     </div>
-                    <form class="contact-form" action="https://formspree.io/f/tuo-codice" method="POST">
+                    <form class="contact-form" id="contact-form" action="https://formspree.io/f/mreyaadq" method="POST">
+                        <!-- Honeypot per lo spam -->
+                        <input type="text" name="_gotcha" style="display:none">
+                        <!-- Oggetto dell'email personalizzato -->
+                        <input type="hidden" name="_subject" value="Nuova richiesta di contatto dal sito DE.CA.">
+                        
                         <div class="form-group">
                             <label for="name">Nome e Cognome *</label>
                             <input type="text" id="name" name="name" required placeholder="Mario Rossi">
@@ -241,7 +246,8 @@
                                     target="_blank">Privacy Policy</a> e acconsento al trattamento dei miei dati
                                 personali. *</label>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block">Invia Richiesta</button>
+                        <button type="submit" id="submit-btn" class="btn btn-primary btn-block">Invia Richiesta</button>
+                        <div id="form-status" class="form-status"></div>
                     </form>
                 </div>
                 <div class="contact-map">

@@ -128,3 +128,63 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('rejectCookies')?.addEventListener('click', () => handleConsent('rejected'));
     document.getElementById('closeCookieBanner')?.addEventListener('click', () => handleConsent('rejected'));
 });
+
+// Form Handling (AJAX)
+document.addEventListener('DOMContentLoaded', () => {
+    const contactForm = document.getElementById('contact-form');
+    if (!contactForm) return;
+
+    const status = document.getElementById('form-status');
+    const submitBtn = document.getElementById('submit-btn');
+
+    contactForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        
+        // Disable button and show loading state
+        submitBtn.disabled = true;
+        const originalBtnText = submitBtn.textContent;
+        submitBtn.textContent = 'Invio in corso...';
+        
+        const data = new FormData(event.target);
+        
+        // Rimuoviamo il consenso dalla mail (è già validato lato client)
+        // per rendere l'email più pulita
+        data.delete('privacy-consent');
+        
+        try {
+            const response = await fetch(event.target.action, {
+                method: contactForm.method,
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                status.innerHTML = "Grazie! Il tuo messaggio è stato inviato correttamente.";
+                status.className = "form-status success show";
+                contactForm.reset();
+            } else {
+                const result = await response.json();
+                if (Object.hasOwn(result, 'errors')) {
+                    status.innerHTML = result["errors"].map(error => error["message"]).join(", ");
+                } else {
+                    status.innerHTML = "Si è verificato un errore durante l'invio. Riprova più tardi.";
+                }
+                status.className = "form-status error show";
+            }
+        } catch (error) {
+            status.innerHTML = "Ops! Si è verificato un errore di connessione. Controlla la tua rete.";
+            status.className = "form-status error show";
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalBtnText;
+            
+            // Auto-hide status message after 5 seconds
+            setTimeout(() => {
+                status.classList.remove('show');
+            }, 5000);
+        }
+    });
+});
+
