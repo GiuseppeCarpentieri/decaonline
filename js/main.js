@@ -35,13 +35,24 @@ if (navToggle && navMenu) {
 
 // Submenu toggle (mobile + click)
 document.querySelectorAll('.submenu-toggle').forEach(toggle => {
-    toggle.addEventListener('click', () => {
+    toggle.addEventListener('click', (e) => {
+        e.stopPropagation(); // Previene conflitti con altri click
         const parent = toggle.closest('.has-submenu');
-        if (!parent) {
-            return;
-        }
+        if (!parent) return;
+        
         const isOpen = parent.classList.toggle('submenu-open');
         toggle.setAttribute('aria-expanded', String(isOpen));
+    });
+});
+
+// Chiudi sottomenu quando il mouse esce dall'area (per desktop)
+document.querySelectorAll('.has-submenu').forEach(item => {
+    item.addEventListener('mouseleave', () => {
+        item.classList.remove('submenu-open');
+        const toggle = item.querySelector('.submenu-toggle');
+        if (toggle) {
+            toggle.setAttribute('aria-expanded', 'false');
+        }
     });
 });
 
@@ -57,12 +68,7 @@ const themeBtns = document.querySelectorAll('.theme-btn');
 const root = document.documentElement;
 
 function setTheme(theme) {
-    if (theme === 'system') {
-        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        root.setAttribute('data-theme', isDark ? 'dark' : 'light');
-    } else {
-        root.setAttribute('data-theme', theme);
-    }
+    root.setAttribute('data-theme', theme);
     
     // Update active class on buttons
     themeBtns.forEach(btn => {
@@ -74,26 +80,19 @@ function setTheme(theme) {
 }
 
 // Initial theme setup
-const savedTheme = localStorage.getItem('theme-preference') || 'system';
+const savedTheme = localStorage.getItem('theme-preference') || 'light';
 setTheme(savedTheme);
-
-// Listen for system theme changes if set to system
-window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-    if (localStorage.getItem('theme-preference') === 'system') {
-        root.setAttribute('data-theme', e.matches ? 'dark' : 'light');
-    }
-});
 
 // Add cyclic click listener to theme switcher container (more robust for mobile)
 const themeSwitcher = document.querySelector('.theme-switcher');
-const themeCycle = ['light', 'dark', 'system'];
+const themeCycle = ['light', 'dark'];
 
 if (themeSwitcher) {
     themeSwitcher.addEventListener('click', (e) => {
         e.preventDefault();
-        const currentTheme = localStorage.getItem('theme-preference') || 'system';
+        const currentTheme = localStorage.getItem('theme-preference') || 'light';
         let currentIndex = themeCycle.indexOf(currentTheme);
-        if (currentIndex === -1) currentIndex = 2; // Default to system if corrupted
+        if (currentIndex === -1) currentIndex = 0; // Default to light if corrupted
         
         const nextIndex = (currentIndex + 1) % themeCycle.length;
         const nextTheme = themeCycle[nextIndex];
